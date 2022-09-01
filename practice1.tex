@@ -1,0 +1,246 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{array}
+
+\title{practice}
+\author{Osama Haque}
+\date{May 2022}
+
+\begin{document}
+
+
+\maketitle
+
+\tableofcontents %this command creates the table of contents with all numbered sections, subsections, etc.
+\pagebreak %This will force the rest of the document to start in another page.
+
+\section{Introduction}
+\LaTeX
+
+\section{Mathematical Equations}
+$
+{y} = 1 - \frac{f^n[\frac{s.1}{f} + {(\frac{20}{f})}^w ]}{20^n}
+$
+%Equation 1
+\begin{equation}
+    {y} = 1 - \frac{f^n[\frac{s.1}{f} + {(\frac{20}{f})}^w ]}{20^n}
+\end{equation}
+
+$
+\frac{df}{dt} = \lim_{h\to 0} \frac{f(t+h)-f(t) }{h}
+$
+
+%Equation 2
+\begin{equation}
+    \frac{df}{dt} = \lim_{h\to 0} \frac{f(t+h)-f(t) }{h}
+\end{equation}
+
+%Equation 3
+\begin{equation}
+    a = \max_{x \in \mathbf{R}}f(x) 
+\end{equation}
+
+%Equation 4
+\begin{equation}
+   \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+\end{equation}
+
+%Equation 5
+\begin{equation}
+    f(x) = a_0 + \sum_{n=1}^\infty(a_n\cos{\frac{n \pi x}{L}} + b_n\sin{\frac{n \pi x}{L}})
+\end{equation}
+
+%Equation 6
+\begin{equation}
+    x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}   %pm = plus-minus sign
+\end{equation}
+
+\subsection{Align}
+\begin{align}
+    f(x) &= x^2-1 \nonumber \\
+     &= (x-1)(x+1)
+\end{align}
+
+
+
+
+\begin{tabular}{|l|l|}
+\hline
+b &   \\ \cline{1-1}
+a & c \\
+a &   \\ \cline{2-2} 
+a & e \\ \hline
+\end{tabular}
+
+\begin{tabular}{|r|r|}
+    \hline
+    b &  \multirow{3}{*}{c} \\
+    \cline{1-1}
+    a &    \\
+    a &    \\
+    \cline{2-2}
+    a & e  \\
+    \hline
+    
+\end{tabular}
+
+
+
+\begin{tabular}{ | p{15em} | p{1cm}| p{5cm} | } 
+  \hline
+  cell1 dummy text dummy text dummy text& cell2 & cell3 \\ 
+  \hline
+  cell1 dummy text dummy text dummy text & cell5 & cell6 \\ 
+  \hline
+  cell7 & cell8 & cell9 \\ 
+  \hline
+\end{tabular}
+
+
+
+\section{emphasis}
+\emph{This sentence is an example of emphasis. Even though it is italic in this example, using another package might change it to something else, like underlined text.  \emph{Also, emphasis can be nested.} The previous sentence was an example of nested emphasis.} 
+
+\section*{Unnumbered Section Example}
+This section should not be numbered. Using * after the section specifier prevents this numbering. This will NOT show up in the Table of Contents.
+\LARGE{This sentence is LARGE.}
+\Huge{This sentence is HUGE.}
+
+\section{Class tables}
+
+\subsection{basic Tables}
+
+\begin{tabular}{|m{3cm}| m{2cm}|m{2cm}|}
+    \hline
+    \textbf{x} & \textbf{y} \textbf{(in centimeter)} & \textbf{h} \\
+    \hline
+    {1} & 2 & h\\
+    \hline
+    200 & 400 & 87 \\
+    \hline
+    
+\end{tabular}
+
+
+\begin{tabular}{|c|c|c|c|}
+    \hline
+	1 & 2 & 3 & 4 \\ 
+	\cline{1-1}\cline{3-4}
+	1 & 2 & 3 & 4  \\
+	\hline
+	\multicolumn{2}{|c|}{text} & 4 & 5 \\
+	\hline
+	\multirow{3}{*}{text} & 2 & 3 & 4 \\
+	\cline{2-4}
+	& 2 & 3 & 4 \\
+	& d & s & r \\
+	\hline
+	\multicolumn{3}{|c|}{\multirow{3}{*}{text afdsf}} & 5 \\
+	\multicolumn{3}{|c|}{} & 7 \\
+	\multicolumn{3}{|c|}{} & 7 \\
+	\hline
+
+\end{tabular}
+
+\subsection{Multi-Column}
+\begin{tabular}{|c|ccc|}
+    \hline
+    1 & \multicolumn{3}{c|}{text} \\
+    \cline{2-4}
+    1 & 2 & 3 & 4 \\
+
+    \hline
+\end{tabular}
+
+\subsection{Cell-wise align}
+\begin{tabular}{|c | c|}
+    \hline
+    x & y \\
+    \hline
+    1 & \multicolumn{1}{l|}{2} \\
+    200 & 400 \\
+    \hline
+\end{tabular}
+
+\begin{tabular}{|c c | c |}
+    \hline
+     1 & 2 & 3 \\
+     \hline
+     \multicolumn{2}{|c|}{\multirow{2}{*}{text}} & 5  \\
+     \multicolumn{2}{|c|}{} & 7 \\
+     \hline
+\end{tabular}
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Si. No.}} & \multicolumn{2}{c}{Reading} & \multicolumn{1}{|c|}{\multirow{2}{*}{Diff}} \\
+\cline{2-3}
+ & initial & final & \\
+ \hline
+\end{tabular}
+
+
+\section{Inside Table scope}
+
+\begin{table}[tbp]  %t = top of the page
+                    %b = bottom of the page
+                    %p = center of a new page
+    \centering
+    \begin{tabular}{|c c|}
+        \hline
+        x & y \\
+        \hline
+        1 & 2 \\
+        200 & 400 \\
+        \hline
+    \end{tabular}
+    \caption{New Table}
+    \label{tab:my_label}
+\end{table}
+
+
+\section{from samee}
+
+\subsection{}
+\begin{tabular}{| c|c | c | c|}
+\hline
+     \multirow{2}{*}{Si. No.} & \multicolumn{2}{c|}{Reading} & \multirow{2}{*}{Difference}   \\
+     \cline{2-3}
+   & initial & final &  \\
+\hline
+\end{tabular}
+
+\subsection{}
+\begin{tabular}{| c|c | c | c|}
+\hline
+    a & b & c & \multirow{2}{*}{d} \\
+    \cline{1-3}
+    \multicolumn{3}{|c|}{e} & \\
+    \hline
+    f & g & \multicolumn{2}{c|}{h} \\
+    \hline
+\end{tabular}
+
+\subsection{}
+\begin{tabular}{|c|c|c|}
+\hline
+    \multicolumn{2}{|c|}{\multirow{2}{*}{a}}     & \multirow{6}{*}{b}   \\
+    \multicolumn{2}{|c|}{}                       &                      \\ \cline{1-2}
+    {c} & \multirow{2}{*}{e}                    &                       \\ \cline{1-1}
+    {d}     &           &                           \\ \cline{1-2}
+\multicolumn{2}{|c|}{\multirow{4}{*}{f}}     &                                         \\
+\multicolumn{2}{|c|}{}                       &                                         \\ \cline{3-3} 
+\multicolumn{2}{|c|}{}                       & {\multirow{2}{*}{g}} \\
+\multicolumn{2}{|c|}{}                       &                  \\ \hline
+\end{tabular}
+
+\end{document}
+
+
+
+
