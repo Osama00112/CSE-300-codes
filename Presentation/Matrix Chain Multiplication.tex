@@ -1,0 +1,233 @@
+\documentclass[algorithm,pgfplots]{cuzbeamer}
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+\usepackage{hyperref}
+\addbibresource{mybibliography.bib} %Imports bibliography file
+\usepackage[scale=2]{ccicons}
+%\usepackage{graphicx,xcolor}
+\usepackage{tikz, stackengine}
+%\usetikzlibrary{decorations.text}
+%\usetikzlibrary{shapes}
+%\usetikzlibrary{overlay-beamer-styles}
+%\usetikzlibrary{matrix}
+\usepackage{amsmath}
+%\usepackage[table,xcdraw]{xcolor}
+
+
+\def\tikzoverlay{%
+   \tikz[baseline,overlay]
+}%
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
+\newcommand*{\LabelText}[3]{%
+\tikzmark{a}#1\tikzmark{b}%
+\begin{tikzpicture}[overlay,remember picture]
+    \path (a.north) -- (b.north) node [yshift=3.0ex, midway,rectangle,draw=#3,rounded corners=2pt,inner sep=1pt,fill=-#3]  {#2\strut};
+\end{tikzpicture}%
+}
+
+
+\begin{document}
+    \input{initialization.tex}
+    \maketitle
+
+    \begin{frame}{Contents}
+        \setbeamertemplate{section in toc}[sections numbered]
+        \tableofcontents
+    \end{frame}
+
+    \section{Description}
+
+    \begin{frame}
+    \printbibliography
+        \onslide<1->\begin{block}{\large{\textbf{Aim}}}
+            \begin{leftbar}
+           \textbf{ To find the most efficient way to multiply a sequence of matrices}
+            \end{leftbar}
+        \end{block}
+        \onslide<2->
+        A : 5x20 \hspace{1cm}  B: 20x10 \hspace{1cm} C: 10x50
+    
+    \onslide<3->
+    
+    \begin{block}{\large{\textbf{Compute ABC}}}
+    \begin{itemize}[(1)]
+    
+    \item<1-> \onslide<4-> (AB)C   \onslide<6->{\quad 5*20*10 + 5*10*50} \onslide<7->{ = \textcolor<8>{green}{3500} operations}
+    \item<1->\onslide<5->  A(BC) \onslide<6-> {\quad 20*10*50 + 5*20*50} \onslide<7->{
+    = \textcolor<8>{red}{15000} operations}
+    \end{itemize}
+    \end{block}   
+    
+    \end{frame}
+
+    \section{Brute Force Algorithm}
+
+    \begin{frame}
+    \begin{block}{\large{\textcolor{cyan}{\textbf{Brute Force Approach :}}}}
+    \\
+      \vspace{0.75cm}
+        
+        \begin{itemize}
+            \item \onslide<2->
+        Consider all possible cases. \\
+        \item \onslide<3->
+        Not a good idea since the number of operations increases exponentially with the number of matrices to multiply. \\
+        \item \onslide<4-> \textcolor{red}{EXPONENTIAL-TIME Algorithm} \\
+        \textcolor{green}{Very slow and not practical} \\
+        \end{itemize}  
+    \end{block}
+    \end{frame}
+    
+    \begin{frame}
+    \centering {\includegraphics[scale=0.05]{think.png}}\\
+    \vspace{1cm}
+    \Large \textcolor{cyan}{\textbf{Effective Solution?}}
+    
+        
+    \end{frame}
+
+    \section{Dynamic Programming Algorithm}
+    
+   \begin{frame}
+   \begin{block}{\large{\textcolor{cyan}{\textbf{Dynamic Programming Approach}}}}\vspace{1cm}
+   
+       To compute A$_{1}$A$_{2}$...A$_{n}$ \\
+       n : \# matrices to multiply \\ 
+       \\
+       A$_{i}$ $\rightarrow$ (d$_{i-1}$ x d$_{i}$)  \text{ matrix} \\
+       A$_{i}$A$_{i+1}$...A$_{j}$ $\rightarrow$ (d$_{i-1}$ x d$_{j}$)  \text{ matrix}\\
+              m(i,j) : Min number of operations required to compute product of A$_i$ to A$_j$ 
+   \end{block}
+   \end{frame}
+
+    \begin{frame}
+        \begin{block}{\textcolor{cyan}{\large{\textbf{Algorithm}}}}
+        \vspace{0.75cm}
+        \begin{itemize}
+            \onslide<1->\item \textcolor{orange}{\textbf{Step 1:}} $m(i,j) = \times $ , $\forall_{i>j}$\\
+            \onslide<2->\item \textcolor{orange}{\textbf{Step 2:}} 
+          \forall$_{1 \leq i \leq j \leq n}$ \\
+            % \quad if i = j,\\
+            % \hspace{1cm}  m(i,j) = 0\\
+            % \quad else \\
+            % \hspace{1cm}
+            % m(i,j) = min \{ m(i,k) + m(k+1, j) + d$_{i-1}$ d$_{k}$ d$_{j}$ \} \\
+            m(i,j) =
+            \begin{cases}
+                & 0 $\quad\quad\quad\quad\quad$ \text{if }  i=j\\
+                &  \text{min}$_{i\le k < j}$ \{ m(i,k) + m(k+1, j) + d$_{i-1}$d$_k$d$_j$ \} \ \text{if $i \ne j$} \\
+                 
+            \end{cases}
+            
+        \quad \onslide<3->\item \textcolor{orange}{\textbf{Step 3:}} Return $m(1,n)$
+        \end{itemize}
+        \end{block}
+    \end{frame}
+    \begin{frame}
+    \begin{block}{\large{\textcolor{cyan}{\textbf{Example}}}}
+    \vspace{0.7cm}
+    Let us consider an example, \\
+    A $\rightarrow$ 40\times20 \\
+    B $\rightarrow$ 20\times30 \\
+    C $\rightarrow$ 30\times10 \\
+    D $\rightarrow$ 10\times30 \\
+    
+    We create a $4\times4$ table for implementing the algorithm
+    
+    
+    \end{block}
+        
+    \end{frame}
+    
+    \begin{frame}
+        \begin{block}{\large{\textcolor{cyan}{\textbf{Example}}}}
+   \vspace{0.25 cm}
+   \begin{tabular}{ccccccc}
+        A & \times & B & \times & C & \times & D  \\
+        40\times20 && 20\times30 && 30\times10 && 10\times30 \\
+   \end{tabular}
+        
+\begin{columns}
+\column{0.5\textwidth}
+\begin{table}[]
+\begin{tabular}{c|cccc}
+{\color[HTML]{FFFFFF} i/j} & {\color[HTML]{FFFFFF} 0} & {\color[HTML]{FFFFFF} 1}     & {\color[HTML]{FFFFFF} 2}     & {\color[HTML]{FFFFFF} 3}     \\ \hline
+0   &
+\onslide<2->{\color[HTML]{FFFFFF}
+\textcolor<4,10>{green}{0}}&  \onslide<3->{\color[HTML]{FFFFFF} \textcolor<5,11>{green}{24000}} & \onslide<6->{\color[HTML]{FFFFFF} \textcolor<6,12>{green}{14000}} & {\onslide<13->{\color[HTML]{FFFFFF} \textcolor{green}{26000}}} \\
+{1}   & {x} &  \onslide<2->{\color[HTML]{FFFFFF}
+\textcolor<7>{green}{0}}     & 
+\onslide<3->{\color[HTML]{FFFFFF}\textcolor<4,8>{green}{6000}}  & \onslide<9->{\color[HTML]{FFFFFF}  \textcolor<9,10>{green}{12000}} \\
+{2}   & {\color[HTML]{FFFFFF} x} & {\color[HTML]{FFFFFF} x}     & \onslide<2->{\color[HTML]{FFFFFF}
+\textcolor<5>{green}{0}}     & \onslide<3->{\color[HTML]{FFFFFF}  \textcolor<7,11>{green}{9000}}  \\
+{3}   & {\color[HTML]{FFFFFF} x} & {\color[HTML]{FFFFFF} x}     & {\color[HTML]{FFFFFF} x}     & \onslide<2->{\color[HTML]{FFFFFF}  \textcolor<8,12>{green}{0}}  
+\end{tabular}
+\end{table}
+\column{0.5\textwidth}
+\onslide<2-> \textcolor{orange}{\textbf{Step 1 :}}
+Fill the table for i = j \textcolor<2>{green}{(All zero values)}\\ 
+
+\onslide<3->
+\textcolor{orange}{\textbf{Step 2 :}} \\ \textcolor<3>{green}{m(0,1) = 40\times20\times30=24000}\\
+\textcolor<3>{green}{m(1,2) =20\times30\times10=6000}\\
+\textcolor<3>{green}{m(2,3) =30\times10\times30=9000}\\
+\onslide<6->
+\textcolor<6>{green}{m(0,2) = min(14000, 36000) = 14000}\\
+\onslide<9->
+\textcolor<9>{green}{m(1,3) = 12000}\\
+\onslide<13->
+\textcolor<13>{green}{m(0,3) = min(26000, 38000) = 26000} \\
+
+\onslide<14->\textcolor{orange}{\textbf{Step 3 :}} return 26000\\
+            
+\end{columns}
+        \end{block}
+    \end{frame}
+\begin{frame}
+    \begin{block}{\large{\textcolor{cyan}{\textbf{Example}}}}
+    \vspace{1cm}
+    So, the resulting sequence : \\
+    \onslide<1->(A B C) D \\
+    \onslide<2-> $\rightarrow$ \textcolor{yellow}{(A (B C)) D} \quad [keeping track of the variable "k"] \\
+    \onslide<3->And the minimum number of multiplication operation = \textcolor{yellow}{26000}
+    
+    
+    \end{block}
+        
+\end{frame}    
+    
+    
+\begin{frame}
+\begin{block}{\large{\textcolor{cyan}{\textbf{Matrix Chain Multiplication}}}}
+\vspace{0.5cm}
+\centering
+\onslide<1->{Time Complexity : \textbf{$O(n^3)$}}\\
+\onslide<2->{Seems most optimal?}
+\onslide<3->\textbf{\alert {  No!!!}} \\
+\onslide<4->
+{\includegraphics[scale=0.25]{Paper.png}} \\
+\onslide<5>{An algorithm published by \textbf{Hu} and \textbf{Shing} (1982) achieves $O(n log n)$ computational complexity \\
+They reduced the problem into \alert{Triangulation of a Regular Polygon.}}
+\end{block}
+
+\end{frame} 
+
+\begin{frame}
+\begin{block}{\large{\textcolor{cyan}{\textbf{References}}}}
+\vspace{3cm}
+\begin{itemize}
+    \item \href{https://en.wikipedia.org/wiki/Matrix_chain_multiplication}{Wikipedia/Matrix Chain Multiplication}
+    \item Introduction to Algorithms by Cormen
+    \item stackoverflow.com
+\end{itemize}
+\end{block}
+
+    
+\end{frame}
+
+\end{document}
